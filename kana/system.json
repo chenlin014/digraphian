@@ -1,0 +1,8 @@
+{
+	"+1": ["c", "t", "k", "u", "a",
+		"A", "U", "K", "T", "C"],
+	"0":  ["q", "n", "s", "o", "a",
+		"A", "O", "S", "N", "Q"],
+	"thumb_keys": ["i", "I"],
+	"key_order": "atnksiuoqcATNKSIUOQCyz"
+}
