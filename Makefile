@@ -1,20 +1,14 @@
 dict-gen=python mb-tool/steno_dict.py
 
-programs=rime
-scripts=kana
+system=system/abc.json
 
-.PHONY: all clean
+chordmap=kana/kana.tsv
 
-all: $(foreach script,$(scripts),$(script)_all)
-
-kana_all: $(foreach program,$(programs),$(program)-kana)
-
-rime-%: build-%
-	cat build/$*.tsv | mb-tool/format.sh rime > build/rime-$*.tsv
-
-build-%:
-	cat $*/table.tsv | awk -F '\t' '{print $$1"\t"$$2} $$2 ~ /^\S+$$/ {print $$1"\t "$$2}' | \
-		$(dict-gen) $*/system.json $*/chordmap.tsv > build/$*.tsv
+all:
+	$(dict-gen) $(system) $(chordmap) --no-table > dict.tsv
+	printf "\n" >> dict.tsv
+	sed -E 's/\t/\t>/'  $(chordmap) | \
+		$(dict-gen) $(system) /dev/stdin --no-table >> dict.tsv
 
 clean:
 	rm build/*
