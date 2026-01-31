@@ -2,7 +2,7 @@ dict-gen=python mb-tool/steno_dict.py
 
 system=system/abc.json
 
-chordmap=kana/kana.tsv
+chordmap?=kana/kana.tsv
 
 all:
 	$(dict-gen) $(system) $(chordmap) --no-table > dict.tsv
